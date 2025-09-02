@@ -1,0 +1,24 @@
+{
+  "xZJUJ2lm5ROBHx3Y-Sgz": [
+    {
+      "user": "Ismail Muhammad Ahmad ",
+      "userfrom": "Starting balance",
+      "account": "8134561943",
+      "amount": 1000,
+      "tmode": "in",
+      "transid": 1756680343983,
+      "transdate": "2025-08-31T22:45:43.983Z",
+      "status": "success"
+    },
+    {
+      "user": "Ismail Muhammad Ahmad ",
+      "userfrom": "Gift from Assudan Bank",
+      "account": "8134561943",
+      "amount": 500,
+      "tmode": "in",
+      "transid": 1756680343997,
+      "transdate": "2025-08-31T22:45:43.997Z",
+      "status": "success"
+    }
+  ]
+}
