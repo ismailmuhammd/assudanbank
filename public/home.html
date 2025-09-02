@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <meta name="author" content="Ismail Muhammad Ahmad" />
+    <meta name="description" content="Assudan Online Bank">
+    <meta name="keyword" content="withdraw, credit">
+    <meta name="title" content="Assudan bank Transaction page">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="/fas-style/css/all.min.css">
+    <link rel="icon" href="assudan.jpg">
+    <title>Assudan bank Transaction page</title>
+    <style>
+        * {
+            font-family: sans-serif;
+        }
+
+        :root {
+            --primary-color: #004d4d;
+            --secondary-color: #333;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background: #eee;
+        }
+
+        @media (min-width: 500px) {
+            .container {
+                max-width: 100vw;
+            }
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            max-width: 500px;
+            align-items: center;
+            justify-content: space-between;
+            margin: auto;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .header {
+            position: fixed;
+            display: flex;
+            align-items: center;
+            background: #f5f5f9;
+            width: 100%;
+            height: 60px;
+            padding: 2px 8px 2px 0;
+            justify-content: space-between;
+            box-sizing: border-box;
+        }
+
+        @media (min-width: 768px) {
+            .header {
+                width: 500px;
+            }
+
+            .footer {
+                width: 500px;
+                bottom: 40%;
+            }
+        }
+
+        .header .user {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 5px;
+            border: none;
+            background: transparent;
+        }
+
+        .header .user img {
+            width: 40px;
+            height: 40px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 1.5px solid var(--primary-color);
+        }
+
+        .header .user span {
+            font-size: 16px;
+            font-weight: bold;
+            white-space: nowrap;
+            max-width: 100px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .header button {
+            border: none;
+            font-size: 16px;
+            background: transparent;
+        }
+
+        .help {
+            display: inline-block;
+            gap: 0;
+            margin: 0;
+            animation: shake 3s infinite;
+            //animation-delay: s;
+            transition: transform 0.6s linear;
+        }
+
+        @keyframes shake {
+
+            0%,
+            100% {
+                transform: translateY(0);
+                //transform: scale(1);
+            }
+
+            10%,
+            30%,
+            50%,
+            70% {
+                transform: translateY(-5px);
+                //transform: scale(1);
+            }
+
+            20%,
+            40%,
+            80% {
+                transform: translateY(5px);
+                //transform: scale(0.8);
+            }
+        }
+
+        .header .message {
+            color: #333;
+            font-weight: normal;
+            position: relative;
+            font-size: 1.2rem;
+        }
+
+        .header .message div {
+            content: "";
+            position: absolute;
+            top: 10%;
+            left: 80%;
+            translate: -50% -50%;
+            padding: 0px;
+            border-radius: 50%;
+            color: #f5f5f9;
+            font-weight: bolder;
+            background: red;
+            font-size: 11px;
+            width: 15px;
+            height: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            white-space: nowrap;
+        }
+
+        .main {
+            background: inherit;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            //height: 400px;
+            margin-top: 60px;
+            margin-bottom: 80px;
+            padding: 10px;
+        }
+
+        .main .mitem {
+            width: 90%;
+            height: 120px;
+            background: #fff;
+            border-radius: 10px;
+            //box-shadow: 0 0 10px rgba(0,0,0,0.2);
+            margin: 10px 0;
+        }
+
+        .main .balance {
+            background: var(--primary-color);
+            display: flex;
+            //flex-direction:column;
+            align-items: center;
+            justify-content: space-around;
+            height: 90px;
+            overflow: auto;
+        }
+
+        .b,
+        .add {
+            height: 100%;
+            display: flex;
+            flex-shrink: 0;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-around;
+            color: #fff;
+        }
+
+        #avb,
+        #thistory {
+            font-size: 13px;
+        }
+
+        #balance {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        #addMoney {
+            padding: 0.4em;
+            background: #fff;
+            color: var(--primary-color);
+            font-size: 15px;
+            border-radius: 20px;
+        }
+
+        .tcon {
+            display: flex;
+            width: 100%;
+            padding: 4px 0;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .main .history {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            width: 95%;
+        }
+
+        .tcon i{
+            margin-right: 0.6rem;
+        }
+
+        .historyB {
+            display: flex;
+            width: 80%;
+            align-items: center;
+            justify-content: space-between;
+            height: 50px;
+        }
+
+        .hmess {
+            margin-left: 2px;
+            overflow: hidden;
+            max-width: 60%;
+        }
+
+        #from {
+            max-width: 100%;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        #time {
+            font-size: 10px;
+            color: #999;
+            font-weight: normal;
+        }
+
+        .hmess div {
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .hstatus {
+            max-width: 39%;
+            overflow: hidden;
+        }
+
+        .hstatus div:nth-child(1) {
+            font-weight: bold;
+            max-width: 100%;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+            font-size: 0.9rem;
+        }
+
+        .hstatus .status {
+            color: var(--primary-color);
+            background: rgba(0, 200, 200, 0.2);
+            padding: 2px;
+            border-radius: 30px;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        .transaction {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+        }
+
+        .transaction button {
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .transaction button i {
+            font-size: 1.5rem;
+            margin-bottom: 6px;
+            padding: 0.2em;
+        }
+
+        .others {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            height: 200px;
+        }
+
+        .others button {
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0.2em;
+        }
+
+        .others button i {
+            font-size: 1.3em;
+            margin-bottom: 5px;
+        }
+
+        .footer {
+            background: #f5f5f9;
+            padding: 10px;
+            position: fixed;
+            width: 100%;
+            max-width: 500px;
+            height: 50px;
+            bottom: 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+            box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.2), 0 0 0 0 rgba(0, 0, 0, 0.5), 0 0 0 0 rgba(0, 0, 0, 0.5), 0 0 0 0 rgba(0, 0, 0, 0.5);
+        }
+
+        .footer button {
+            border: none;
+            background: transparent;
+            font-weight: 400;
+            font-size: 15px;
+        }
+
+        .footer .active {
+            border: solid 1px var(--primary-color);
+            background: var(--primary-color);
+            font-weight: 400;
+            font-size: 15px;
+            color: white;
+            font-weight: bold;
+            padding: 4px;
+            border-radius: 10px;
+        }
+
+        .message-cont {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            background: rgba(0, 0, 0, 0.2);
+            pointer-events: auto;
+            display: none;
+        }
+
+        .message-home {
+            width: 60%;
+            max-width: 300px;
+            min-height: 120px;
+            background: #fff;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            translate: -50% -50%;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            flex-direction: column;
+            padding: 5px;
+        }
+
+        .message-home .message {
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .message-home button {
+            width: 60%;
+            padding: 5px;
+            border-radius: 20px;
+            border: none;
+            background: var(--primary-color);
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        #thistory {
+            cursor: pointer;
+        }
+
+        i {
+            color: var(--primary-color);
+            font-size: 1.2rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <button class="user" onclick="window.location.href='profile.html'">
+                <img src="" alt="user image"> <span></span>
+            </button>
+            <button class="help" onclick="window.location.href='chat'">
+                <i class="fas fa-robot"></i>
+            </button>
+            <button class="message" onclick="window.location.href='message'">
+                <i class="fas fa-bell"></i>
+                <div></div>
+            </button>
+        </div>
+
+        <div class="main">
+            <div class="mitem balance">
+                <div class="b" onclick="window.location.href='availableBalance.html'">
+                    <div id="avb">Available Balance</div>
+                    <div id="balance">&#8358;0.00</div>
+
+                </div>
+                <div class="add">
+                    <div id="thistory" onclick="window.location.href='history.php'">Transaction History</div>
+                    <div id="addMoney" onclick='say()'>+ Add Money</div>
+                </div>
+            </div>
+
+            <div class="mitem history">
+
+            </div>
+
+            <div class="mitem transaction">
+                <button onclick="location.replace('transaction.php')">
+                    <i class="fas fa-wallet"></i>
+                    <div>To Assudan</div>
+                </button>
+
+                <button onclick='say()'>
+                    <i class="fas fa-bank"></i>
+                    <div>To Bank</div>
+                </button>
+
+                <button onclick='say()'>
+                    <i class="fas fa-hand-holding-usd"></i>
+                    <div>Withdraw</div>
+                </button>
+            </div>
+
+            <div class="mitem others" style="height: 150px;">
+                <button onclick='window.location.href="https://assudanglobalnetworks.com"'>
+                    <i class="fas fa-signal"></i>
+                    <div>Airtime</div>
+                </button>
+
+                <button onclick='window.location.href="https://assudanglobalnetworks.com"'>
+                    <i class="fas fa-wifi"></i>
+                    <div>Data</div>
+                </button>
+
+                <button onclick='window.location.href="http://assudan.atwebpages.com/Pano_Tv"'>
+                    <i class="fas fa-tv"></i>
+                    <div>Pano TV</div>
+                </button>
+
+                <button onclick='window.location.href="https://assudanglobalnetworks.com"'>
+                    <i class="fas fa-bolt"></i>
+                    <div>Electricity</div>
+                </button>
+
+                <button onclick='say()'>
+                    <i class="fas fa-school"></i>
+                    <div>School</div>
+                </button>
+
+                <button onclick='say()'>
+                    <i class="fas fa-edit"></i>
+                    <div>Exams</div>
+                </button>
+
+                <button onclick='say()'>
+                    <i class="fas fa-credit-card"></i>
+                    <div>Loan</div>
+                </button>
+
+                <button onclick='say()'>
+                    <i class="fas fa-graduation-cap"></i>
+                    <div>Results</div>
+                </button>
+            </div>
+        </div>
+
+        <div class="footer">
+            <button class="active">Home</button>
+            <button onclick='say()'>Reward</button>
+            <button onclick='say()'>Financial</button>
+            <button onclick='say()'>Card</button>
+            <button>Me</button>
+        </div>
+
+        <div class="message-cont">
+            <div class="message-home">
+                <div class="message">
+                    Please check your internet connection
+                </div>
+                <button onclick="document.querySelector('.message-cont').style.display='none'">Okay</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        /* class for functions */
+        class Bank {
+            /*========Constructor=====*/
+            constructor() {
+                this.lastHistory = null;
+                this.transac = null;
+            }
+            /* Footer Buttons */
+            footerButton() {
+                var footerbut = document.querySelectorAll(".footer button");
+                footerbut.forEach((a, index) => {
+                    a.onclick = () => {
+                        for (var i = 0; i < footerbut.length; i++) {
+                            footerbut[i].className = "";
+                        }
+                        a.className = "active"
+                        if (a.innerHTML == "Me") {
+                            window.location.href = 'profile.html'
+                        } else if (a.innerHTML == 'Home') {
+
+                        } else {
+                            say();
+                        }
+                    }
+                });
+            }
+            /*=======Get User Record=====*/
+            getUser() {
+                fetch('/getHome',{
+                    method: 'post',
+                    headers: {'Content-Type' : 'application/json'},
+                    body: JSON.stringify({
+                        passkey: 'Assudan@onlinebank'
+                    })
+                }).then(response =>{
+                    if(!response.ok){
+                        throw new Error(response.statusText);
+                    }
+                    return response.json();
+                }).then(result =>{
+                    if(result.status === 'error'){
+                        alert(result.message);
+                        window.location.href = 'login';
+                    }
+                    if(!result) return;
+                    let user = result.user;
+                    document.querySelector(".header .message div").innerHTML = user['unread'] > 0 ? user['unread'] : document.querySelector(".header .message div").style.display = 'none';
+                    document.querySelector(".header .user img").src = user['image'];
+                    document.querySelector(".header .user span").textContent = `Hi ${user['username']}`;
+                    document.getElementById("balance").innerHTML = `&#8358;${parseFloat(user['balance']).toLocaleString('en-NG',{minimumFractionDigits:2,maximumFractionDigits:2})}`;
+                    this.createHistory(result.transac);
+                }).catch(error =>{
+                    alert(error);
+                });
+            }
+            /* create History */
+            createHistory(transac) {
+
+                if (false) {
+                } else {
+                    const history = transac;
+                    var len = history.length;
+                    this.lastHistory = [history[len - 1], history[len - 2]];
+
+                    this.lastHistory.forEach((user, i) => {
+                        var historycont = document.getElementsByClassName("history")[0];
+
+                        historycont.innerHTML += `
+                        <div class="tcon">
+                            <i class='fas fa-wallet'></i>
+                            <div class="historyB">
+                              <div class="hmess">
+                                <div id="from">${user['userfrom']}</div>
+                                <div id="time">${new Date(user['transdate']).toDateString()}</div>
+                              </div>
+                              <div class="hstatus">
+                                <div>${user['tmode'] == 'in' ? '+' : '-'}&#8358;${parseFloat(user['amount']).toLocaleString('en-NG',{minimumFractionDigits:2,maximumFractionDigits:2})}</div>
+                                <div class="status">${user['status']}full</div>
+                              </div>
+                           </div>
+                         </div>   
+                       `;
+                    })
+                }
+            }
+            /* custom alertBox */
+            alertBox(msg, bgcolor = "white", fgcolor = '#000') {
+                var messageHome = document.querySelector('.message-home');
+                var message = document.querySelector('.message-home .message');
+                message.textContent = msg;
+                message.style.color = fgcolor;
+                messageHome.style.background = bgcolor;
+                document.querySelector('.message-cont').style.display = "flex";
+            }
+            
+            //========View History=======//
+            viewHistory() {
+                var historys = document.querySelectorAll('.tcon');
+                historys.forEach((a, i) => {
+                    a.onclick = () => {
+                        //Get Transaction Id from history
+                        const tId = (this.lastHistory[i].transactionid);
+                        document.cookie = "transactionid=" + tId + ";expires=" + new Date(Date.now() + 100 * 60 * 60 * 24) + ";path=/";
+                        window.location.href = "transferDetails.php";
+                    }
+                });
+            }
+        }
+        /*========== object ==========*/
+        const bank = new Bank();
+
+        /*========== Footer buttons ==========*/
+        bank.footerButton();
+        /*========Get User Data and Set=======*/
+        bank.getUser();
+
+        /* create History */
+        //bank.createHistory();
+        /*========Call Function View History=====*/
+        bank.viewHistory();
+        /*========Tell user about system====*/
+        function say() {
+            alert("Sorry this page is not available yet bcz the system is still under construction");
+        }
+    </script>
+</body>
+
+</html>

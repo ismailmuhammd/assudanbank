@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <meta name="author" content="Ismail Muhammad Ahmad">
+    <meta name="title" content="Buy Airtime">
+    <meta name="description" content="Buy Airtime Using Assudan Bank">
+    <meta name="keywords" content="Key, Airtime, Amount">
+    <title>Buy Airtime</title>
+    <style>
+        * {
+            font-family: sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        :root{
+            --primary-color: #004d4d;
+        }
+
+        body {
+            background: #eee;
+        }
+
+        .container {
+            max-width: 500px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: #eee;
+            margin: auto;
+            position: relative;
+        }
+
+        .container .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #fff;
+            width: min(500px, 100%);
+            position: fixed;
+            top: 0;
+            height: 50px;
+            padding: 0 10px;
+        }
+
+        .header a {
+            text-decoration: none;
+            color: var(--primary-color);
+        }
+
+        .container .main-1 {
+            background: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-around;
+            width: 95%;
+            margin-top: 60px;
+            padding: 5px 0;
+            border-radius: 10px 10px 0 0;
+            text-transform: uppercase;
+        }
+
+        .container .main-1 div {
+            background: #333;
+            color: #fff;
+            padding: 5px;
+            width: 200px;
+            text-align: center;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: bold;
+            margin: 5px 0;
+        }
+
+        .container .main-2 {
+            background: #fff;
+            width: 95%;
+            border-radius: 0 0 10px 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            padding: 10px 0;
+        }
+
+        .main-2 img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            aspect-ratio: 1/1;
+        }
+
+        .main-2 input {
+            outline: none;
+            padding: 10px 15px;
+            border-radius: 20px;
+            border: none;
+            background: #eee;
+            font-size: 20px;
+            max-width: 200px;
+        }
+
+        .container .main-3 {
+            width: 95%;
+            background: #fff;
+            border-radius: 10px;
+            margin-top: 20px;
+            margin-bottom: 30px;
+        }
+
+        .main-3 .top {
+            float: right;
+            padding: 5px;
+            color: var(--primary-color);
+            font-size: 12px;
+            background: rgba(40, 200, 100, 0.2);
+            border-radius: 10px;
+            border-bottom-right-radius: 0;
+
+        }
+
+        .main-3 .amount {
+            font-weight: bold;
+        }
+
+        .main-3 .main-1-0 {
+            width: 100%;
+            padding: 15px 10px;
+            overflow: hidden;
+        }
+
+        .main-3 .main-1-0 .over {
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .main-3 .main-1-0 .over input {
+            width: 70%;
+            padding: 10px 30px;
+            outline: none;
+            border: none;
+            border-bottom: 1px solid #ccc;
+            font-size: 20px;
+            color: var(--primary-color);
+        }
+
+        .main-3 .main-1-0 .over button {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 20px;
+            font-size: 18px;
+            width: 25%;
+            padding: 5px;
+        }
+
+        .main-3 .main-1-0 input:focus {
+            border-bottom: 1px solid var(--primary-color);
+        }
+
+        .main-3 .main-1-0 .over label {
+            position: absolute;
+            z-index: 1;
+            top: 15%;
+            left: 0;
+            font-size: 25px;
+        }
+
+        .main-3 .main-1-0 .money {
+            width: 100%;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            margin: 15px 5px;
+        }
+
+        .main-3 .main-1-0 .money button {
+            background: #f5f5f9;
+            border: none;
+            margin: 5px;
+            padding: 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        .container .main-4{
+            background: rgba(0,0,0,0.4);
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            display: none;
+            align-items: flex-end;
+            transition: display 1s ease;
+        }
+        .main-3-hide{
+            height: 100%;
+            animation: h 0.5 ease;
+        }
+        @keyframes h{
+            from{
+                height: 100%;
+            }to{
+                height: 0%;
+            }
+        }
+        .main-4 .main{
+            height: 90%;
+            width: 100%;
+            background: #fff;
+            border-radius: 20px 20px 0 0;
+            padding: 10px 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            animation: ma 0.5s ease;
+        }
+        @keyframes ma{
+            from{
+                height: 0%;
+            }to{
+                height: 90%;
+            }
+        }
+        .main-4 .cancel{
+            width: 100%;
+            font-size: 30px;
+            color: #999;
+            text-align: right;
+            cursor: pointer;
+        }
+        .main-4 .amount{
+            margin: 20px 0;
+            font-weight: bold;
+            font-size: 30px;
+        }
+        .main-4 .main .table{
+            display: grid;
+            grid-template-columns: 100px 1fr;
+            grid-template-rows: 30px 30px 30px;
+            width: 100%;
+            margin:10px 0;
+        }
+        .main .table img{
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+        }
+        .table .td{
+            text-align: right;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 10px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .main .table .td span{
+            font-size: 15px;
+            overflow: hidden;
+            white-space: nowrap;
+            width: 85%;
+            text-overflow: ellipsis;
+        }
+        .main-4 .wallet{
+            display: flex;
+            width: 100%;
+            align-items: center;
+            padding: 10px 5px;
+            gap: 10px;
+            cursor: pointer;
+            background: #f5f5f9/*rgba(40,200,100,0.5)*/;
+            border-radius: 10px;
+            margin: 10px 0;
+        }
+           
+        .main-4 .wallet img{
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: var(--primary-color) 1px solid;
+        }
+        .main-4 .wallet .ussd{
+            color: #000;
+            font-weight: bold;
+        }
+        .main-4 .main .tpin {
+            width: 100%;
+            margin: 15px 0;
+        }
+        .main-4 .main .tpin input{
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            font-size: 16px;
+            outline: none;
+        }
+        .main-4 .main button{
+            width: 100%;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 20px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        
+        /*======Message=====*/
+        .message-cont{
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            background: rgba(0,0,0,0.2);
+            pointer-events: auto;
+            display: none;
+        }
+        .message-home{
+            width: 60%;
+            max-width: 300px;
+            min-height: 120px;
+            background: #fff;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            translate: -50% -50%;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            flex-direction: column;
+            padding: 5px;
+        }
+        .message-home .message{
+            font-size: 16px;
+            font-weight: bold;
+        }
+        .message-home button{
+            width: 60%;
+            padding: 5px;
+            border-radius: 20px;
+            border: none;
+            background: var(--primary-color);
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <div>Airtime</div>
+            <a href="history.html">History</a>
+        </div>
+
+        <div class="main main-1">
+            <div style="text-transform:uppercase;font-size:10px;">Limited Time New Customer Offer</div>
+            <div>Register & Bet</div>
+            <div>Get &#8358;1000 free</div>
+            <div>Only with referral code</div>
+        </div>
+
+        <div class="main-2">
+            <img src="assudan.jpg" alt="Assudan Logo">
+            <input type="tel" placeholder="Phone Number" minlength="11" maxlength="11">
+            <img src="svg/user.svg" alt="User Logo">
+        </div>
+
+        <div class="main-3">
+            <div class="top">No Transaction Fees</div><br>
+
+            <div class="main-1-0">
+                <div class="amount">Top Up</div>
+
+                <div class="money">
+                    <button>&#8358;50</button>
+                    <button>&#8358;100</button>
+                    <button>&#8358;200</button>
+                    <button>&#8358;500</button>
+                    <button>&#8358;1,000</button>
+                    <button>&#8358;2,000</button>
+                </div>
+
+                <div class="over">
+                    <input type="tel" minlength="10" maxlength="10" placeholder="50.00 - 500,000.00">
+                    <button>Pay</button>
+                    <label>&#8358;</label>
+                </div>
+
+            </div>
+            
+            <div class="main-4">
+                <div class="main">
+                    <div class="cancel">&times;</div>
+                    <div class="amount">&#8358;5,000,000.00</div>
+                   <div class="table">
+                       
+                       <div class="th">Phone No.</div>
+                       <div class="td" id="num">8134561943</div>
+                       
+                       <div class="th">Name</div>
+                       <div class="td">
+                           <img src="svg/user.svg" alt="">
+                           <span>ISMAIL MUHAMMAD AHMAD</span>
+                       </div>
+                       
+                       <div class="th">Amount</div>
+                       <div class="td">&#8358;5,000,000.00</div>
+                       
+                   </div>
+                   
+                   <div class="wallet">
+                     <img src="svg/phone.svg" alt="Airtime logo">
+                     <div>
+                       <div class="ussd">Wallet (&#8358; 5,000,000.00)</div>
+                       <div>Available Balance</div>
+                     </div>
+                   </div>
+                   
+                   <div class="tpin">
+                      <input type="tel" minlength="4" maxlength="4" placeholder="Enter Transaction PIN"> 
+                   </div>
+                   <button>Confirm Payment</button>
+                </div>
+            </div>
+
+        </div>
+        
+        <!--Message alert-->
+        <div class="message-cont">
+            <div class="message-home">
+                <div class="message">
+                    Please check your internet connection
+                </div>
+                <button onclick="document.querySelector('.message-cont').style.display = 'none'">Okay</button>
+            </div>
+        </div>
+
+    </div>
+    <script>
+        class User{
+            /*========Verify Phone Number=======*/
+            isNumber(number){
+                const numregx=/^(\+234|0)?[7|8|9][1|0]\d{8}$/;
+                number=number.replace(/\D/,'');
+                return numregx.test(number) && number.length==11;
+            }
+            /*=======Internet Connection=====*/
+            isConnected(){
+                var result = false;
+                if(window.navigator.onLine){
+                    result = true;
+                }else{
+                    result = false;
+                }
+                window.addEventListener('online',()=>{
+                    result = true;
+                });
+                window.addEventListener('offline',()=>{
+                    result = false;
+                });
+                return result;
+            }
+            /*===========Message AlartBox=======*/
+            alertBox(message,bgcolor = 'white',fgcolor = 'black'){
+                var mess = document.querySelector('.message');
+                var messHome = document.querySelector('.message-home');
+                mess.textContent = message;
+                mess.style.color = fgcolor;
+                messHome.style.background = bgcolor;
+                document.querySelector('.message-cont').style.display = 'flex';
+            }
+            /*=========Get user Balance========*/
+            getUserBalance(){
+                var xhr;
+                if(window.XMLHttpRequest){
+                    xhr = new XMLHttpRequest();
+                }else{
+                    xhr = new ActiveXObject('microsoft.XMLHTTP');
+                }
+                xhr.open('GET','getbalance.php',true);
+                xhr.onload = e =>{
+                    if(xhr.status == 200 && xhr.readyState == 4){
+                        var balance = JSON.parse(e.target.response);
+                        return parseFloat(balance);
+                    }else{}
+                }
+                xhr.send();
+            }
+        }
+        /*=========Define Class Object=========*/
+        const user = new User();
+        /*=====Click Button to Select amount===*/
+        document.querySelectorAll(".main-3 .main-1-0 .money button").forEach(button => {
+            button.addEventListener("click",()=>{
+                document.querySelector(".main-3 .main-1-0 .over input").value = parseFloat(button.textContent.replace(',','').replace('₦','')).toLocaleString("en-NG",{
+                    minimumFractionDigits:2,
+                    maximumFractionDigits:2
+                });
+            });
+        });
+        /*=======Confirm the inputs===========*/
+        document.querySelector(".main-3 .main-1-0 .over button").addEventListener("click",()=>{
+            const number = document.querySelector('.main-2 input').value;
+            const amount = document.querySelector('.main-3 .main-1-0 .over input').value.replace(',','').replace('₦','');
+            if(user.isConnected()){
+                if(user.isNumber(number)){
+                    if(parseFloat(amount) >= 50 && parseFloat(amount) <= 500000){
+                        document.querySelector('.main-4 .amount').textContent = `₦${parseFloat(amount).toLocaleString('en-NG',{
+                            minimumFractionDigits:2,
+                            maximumFractionDigits:2
+                        })}`;
+                        document.querySelector('.main-4 .td:last-child').textContent = `₦${parseFloat(amount).toLocaleString('en-NG',{
+                            minimumFractionDigits:2,
+                            maximumFractionDigits:2
+                        })}`;
+                        document.getElementById('num').textContent = number;
+                        document.querySelector('.container .main-4').style.display="flex";
+                    }else{
+                        user.alertBox('Amount will not be less than ₦50.00 and greater than ₦500,000.00');
+                    }
+                }else{
+                    user.alertBox('Invalid phone number');
+                }
+            }else{
+                user.alertBox('No internet Connection');
+            }
+        });
+        /*===========Hide toggle==============*/
+        document.querySelector(".main-4 .cancel").addEventListener("click",()=>{
+            document.querySelector('.main-4').style.display = 'none';
+        });
+    </script>
+</body>
+
+</html>

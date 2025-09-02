@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+    <meta name="author" content="Ismail Muhammad Ahmad">
+    <meta name="title" content="Assudan Bank | Messages">
+    <meta name="description" content="Assudan Bank System & Users Messages">
+    <meta name="keywords" content="😛🙏👍">
+    <link rel="icon" href="assudan.jpg">
+    <title>Assudan Bank | Messages </title>
+    <style>
+        * {
+            font-family: helvetica;
+        }
+
+        body {
+            background: #eee;
+        }
+
+        .container {
+            max-width: 500px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: auto;
+        }
+
+        .container .header {
+            background: #fff;
+            padding: 20px;
+            padding-left: 40px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            color: #333;
+            font-weight: bolder;
+            font-size: 1.2rem;
+        }
+
+        .back {
+            cursor: pointer;
+        }
+
+        .back::before {
+            content: '';
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            border-width: 2px;
+            border-color: #555 transparent transparent #555;
+            border-style: solid;
+            top: 50%;
+            left: 5%;
+            translate: -50% -50%;
+            transform: rotate(-45deg);
+            cursor: pointer;
+        }
+
+        .date {
+            margin: 5px;
+            padding: 10px;
+            background: #f5f5f9;
+            border-radius: 20px;
+            color: #04aa6d;
+            font-weight: bolder;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .message {
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 15px 0;
+            width: 95%;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .message-header {
+            background: rgba(40, 200, 100, 0.8);
+            padding: 20px 10px;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 18px;
+            font-weight: bold;
+            font-family: arial;
+
+        }
+
+        .open-message {
+            flex-shrink: 0;
+            position: relative;
+            padding-right: 3px;
+        }
+
+        .open-message::after {
+            content: '';
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            border-width: 2px;
+            border-color: transparent #fff #fff transparent;
+            border-style: solid;
+            top: 50%;
+            left: 0%;
+            translate: -50% -50%;
+            transform: rotate(40deg);
+            cursor: pointer;
+        }
+
+        .close-message {
+            flex-shrink: 0;
+            position: relative;
+        }
+
+        .close-message::after {
+            content: '';
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            border-width: 2px;
+            border-color: transparent #fff #fff transparent;
+            border-style: solid;
+            top: 40%;
+            left: 5%;
+            translate: -50% -50%;
+            transform: rotate(40deg);
+            cursor: pointer;
+        }
+
+        .message-content {
+            background: #fff;
+            padding: 20px 10px;
+            line-height: 20px;
+            font-size: 13px;
+            font-weight: 410;
+            color: #333;
+            display: non;
+        }
+        @media(min-width: 756px){
+            .container{
+                /*display: inline;*/
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="back" onclick="window.location.href='home'"></div>
+            Notifications
+        </div>
+
+        <div style="margin-top: 70px;"></div>
+        
+        <!--Messages will display here using javascript-->
+
+    </div>
+    <script>
+    window.onload = function(){
+        fetch('getMessage',{
+            method: 'post',
+            body: JSON.stringify({
+                passkey: 'Assudan@onlinebank'
+            })
+        }).then(response =>{
+            if(!response.ok){
+                throw new Error(response.statusText);
+            }
+            return response.json();
+        }).then(result =>{
+            if(result.status === 'nofound'){
+                alert(result.message);
+                window.location.href = 'login';
+            }else if(result.status === 'success'){
+                setMessage(result.messages);
+            }
+        }).catch(error =>{
+            alert(error);
+        });
+    }
+    function setMessage(messages){
+        var message = messages.reduce((groups,element)=>{
+            var date = new Date(element.message_date).toLocaleDateString('en-NG',{year:'numeric',month:'long',day:'numeric'});
+            if(!groups[date]){
+                groups[date] = [];
+            }
+            groups[date].push(element);
+            return groups;
+        },{});
+        //for loop to iterate the object
+        for(const i in message){
+            var container = document.querySelector('.container');
+            container.innerHTML += `<div class="date">${i}</div>`;
+            message[i].forEach((a)=>{
+                container.innerHTML += `
+                <div class="message">
+                    <div class="message-header">
+                        <div class="message-title">${a.message_title}</div>
+                        <div class="open-message"></div>
+                    </div>
+                    <div class="message-content">
+                        ${a.message_body}
+                    </div>
+                </div>
+                `;
+            });
+        }
+    }
+    </script>
+</body>
+
+</html>

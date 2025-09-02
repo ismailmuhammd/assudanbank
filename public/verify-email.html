@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Assudan online banking system" />
+    <meta name="title" content="Assudan Online Bank">
+    <meta name="keyword" content="phone,sign up, Assudan, online,bank">
+    <meta name="author" content="Ismail Muhammad Ahmad" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="/fas-style/css/all.min.css">
+    <link rel="icon" href="assudan.jpg" type="image/jpeg">
+    <title>Email Verification | Assudan Bank</title>
+    <style>
+        body {
+            padding: 0px;
+        }
+
+        * {
+            font-family: sans-serif;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #004d4d;
+        }
+
+        .container {
+            background: #fff;
+            max-width: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            margin: auto;
+        }
+
+        .container img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        form {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            /*border: solid 1px #4caf50;
+            border-radius: 10px;
+            background: #f5f5f9;*/
+        }
+
+        .form-input {
+            position: relative;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 20px;
+        }
+
+        .form-input i {
+            position: absolute;
+            color: var(--primary-color);
+            top: 50%;
+            right: 17%;
+            translate: 50% -50%;
+            padding: 5px;
+            cursor: pointer;
+        }
+
+        form input {
+            width: 80%;
+            padding: 15px 25px 15px 20px;
+            font-size: 16px;
+            background: #fff;
+            border: none;
+            border: 1.5px solid #ccc;
+            outline: none;
+            border-radius: 10px;
+        }
+
+        form input:focus {
+            border: 1.5px solid var(--primary-color);
+        }
+
+        form button {
+            width: 70%;
+            border: none;
+            padding: 10px;
+            border-radius: 20px;
+            background: var(--primary-color);
+            color: white;
+            font-size: 1rem;
+            margin: 20px 0;
+        }
+
+        .invite {
+            width: 90%;
+            background: #f5f5f9;
+            border-radius: 10px;
+            margin: 20px 0 10px 0;
+            padding: 1rem;
+            gap: 10px;
+            font-size: 0.9rem;
+            box-sizing: border-box;
+            font-weight: 500;
+        }
+
+        .invite input {
+            background: #fff;
+        }
+
+        form button {
+            width: 70%;
+            border: none;
+            padding: 10px;
+            border-radius: 20px;
+            background: var(--primary-color);
+            color: white;
+            font-size: 1rem;
+            margin: 10px 0;
+        }
+
+        form span {
+            margin: 10px;
+            font-size: 16px;
+        }
+
+        form span a {
+            text-decoration: none;
+            color: var(--primary-color);
+        }
+
+        #error {
+            color: red;
+        }
+
+        .loader {
+            width: 15px;
+            height: 15px;
+            display: inline-block;
+            border: 3px solid var(--primary-color);
+            border-radius: 50%;
+            border-top: 3px solid transparent;
+            border-bottom: 3px solid transparent;
+            animation: load 1s infinite ease-in;
+        }
+
+        @keyframes load {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .message-cont {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            background: rgba(0, 0, 0, 0.2);
+            pointer-events: auto;
+            display: none;
+        }
+
+        .message-home {
+            width: 60%;
+            max-width: 300px;
+            min-height: 120px;
+            background: #fff;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            translate: -50% -50%;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            flex-direction: column;
+            padding: 5px;
+        }
+
+        .message-home .message {
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .message-home button {
+            width: 60%;
+            padding: 5px;
+            border-radius: 20px;
+            border: none;
+            background: var(--primary-color);
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <img src="/assudan.jpg" alt="Bank Logo">
+        <h2>Verify your Email</h2>
+        <form name="form" id="form" method="post">
+            <div class="form-input">
+                <input type="email" name="email" placeholder="Enter your email" autofocus>
+                <i class="fas fa-envelope"></i>
+            </div>
+            <div class="invite">
+                Enter your Registered email to verify before forgotten your password.
+            </div>
+
+            <p id="error"></p>
+            <button id="but">Verify</button>
+            <span>check email? <a href="login">Back</a></span>
+        </form>
+
+        <div class="message-cont">
+            <div class="message-home">
+                <div class="message">
+                    Please check your internet connection
+                </div>
+                <button onclick="document.querySelector('.message-cont').style.display='none'">Okay</button>
+            </div>
+        </div>
+
+    </div>
+    <script>
+        class User {
+            constructor() {
+                this.timeout = null;
+            }
+            isConnected() {
+                var but = document.getElementById("but");
+                if (window.navigator.onLine) {
+                    but.disabled = false;
+                    but.style.opacity = 1;
+                } else {
+                    but.disabled = true;
+                    but.style.opacity = 0.3;
+                }
+                window.addEventListener("online", () => {
+                    but.disabled = false;
+                    but.style.opacity = 1;
+                });
+                window.addEventListener("offline", () => {
+                    but.disabled = true;
+                    but.style.opacity = 0.3;
+                });
+            }
+
+            loader(a, b = "var(--primary-color)") {
+                document.getElementById("but").innerHTML = a;
+                document.getElementById("but").style.background = b;
+            }
+
+            isEmail(code) {
+                const regcode = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                //var code=code.replace(/\D/,"");
+                return regcode.test(code);
+            }
+
+            error(a) {
+                document.getElementById("error").textContent = (a);
+                clearTimeout(this.timeout);
+                this.timeout = setTimeout(() => {
+                    document.getElementById("error").textContent = ("");
+                }, 3000);
+            }
+
+            alertBox(msg, bgcolor = "white", fgcolor = '#000') {
+                var messageHome = document.querySelector('.message-home');
+                var message = document.querySelector('.message-home .message');
+                message.textContent = msg;
+                message.style.color = fgcolor;
+                messageHome.style.background = bgcolor;
+                document.querySelector('.message-cont').style.display = "flex";
+            }
+        }
+
+        const user = new User();
+        //user.isConnected();
+        var form = document.getElementById("form");
+        form.addEventListener("submit", (e) => {
+            e.preventDefault();
+            if (user.isEmail(form.elements[0].value)) {
+                user.loader("<div class='loader'></div>", '#ddd');
+                var xhr;
+                if (window.XMLHttpRequest) {
+                    xhr = new XMLHttpRequest();
+                } else {
+                    xhr = new ActiveXObject('microsoft.XMLHTTP');
+                }
+                xhr.open(form.method, 'php/verify-email.php', true);
+                xhr.onload = e => {
+                    if (xhr.status == 200 && xhr.readyState == 4) {
+                        const mess = (e.target.response);
+
+                        if (mess == 'true') {
+                            user.loader('Verify');
+                            form.reset();
+                            user.alertBox('Email have been verified');
+                            setTimeout("window.location.href = 'forgot-password.html'", 2000);
+                        } else if (mess == 'false') {
+                            user.alertBox('Incorrect email, Please check your email address and try again!', 'rgb(230,70,70)', '#fff');
+                            user.loader('Verify');
+                        }
+                    } else {
+                        user.loader('Verify');
+                        user.error('Please check your network connection');
+                    }
+                }
+                xhr.send(new FormData(form));
+            } else {
+                user.error("Invalid email address");
+            }
+        })
+    </script>
+</body>
+
+</html>

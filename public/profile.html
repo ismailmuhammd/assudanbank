@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="Ismail Muhammad Ahmad" />
+    <meta name="title" content="User Information | Assudan Online Bank" />
+    <meta name="description" content="User Page @ Assudan Bank" />
+    <title>User Information | Assudan Online Bank</title>
+    <!-- Animate.css CDN -->
+    <style>
+        * {
+            font-family: sans-serif;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #eee;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: auto;
+            padding: 20px 10px;
+        }
+
+        .header {
+            position: sticky;
+            top: 0;
+            background: #fff;
+            padding: 15px 25px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            font-size: 18px;
+            font-weight: bold;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .head {
+            background: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 15px;
+            text-align: center;
+        }
+
+        .user-image button {
+            background: none;
+            border: 1px solid #04aa6d;
+            border-radius: 10px;
+            color: #04aa6d;
+            margin: 5px 0;
+            padding: 2px 5px;
+            font-size: 12px;
+        }
+
+        .user-image button:hover {
+            background: #04aa6d;
+            color: #fff;
+        }
+
+        .user-image img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        /*Modal Upload*/
+        .upload-content {
+            height: 400px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+        }
+
+        form .form-content {
+            text-align: center;
+        }
+
+        form div label {
+            background: transparent;
+            color: #04aa6d;
+            padding: 10px;
+            font-size: 15px;
+            border-radius: 10px;
+            cursor: pointer;
+            border: #04aa6d 1px solid;
+            font-weight: 410;
+            margin: 10px;
+        }
+
+        form input:focus {
+            border: 1.5px solid #04aa6d;
+        }
+
+        #modal-img {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            margin: 10px 0;
+            object-fit: cover;
+        }
+
+        /*Progress Bar*/
+
+        .upload-btn {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .upload-btn div {
+            position: absolute;
+            background-color: #04aa6d;
+            width: 0%;
+            height: 100%;
+            top: 0%;
+            left: 0%;
+        }
+
+        .user-name {
+            font-weight: bold;
+            font-size: 17px;
+            margin-top: 5px;
+        }
+
+        .table {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            margin-top: 15px;
+            row-gap: 10px;
+        }
+
+        .table .th {
+            font-weight: 600;
+            text-align: left;
+        }
+
+        .table .td {
+            text-align: right;
+            color: #555;
+        }
+
+        .main {
+            background: #fff;
+            border-radius: 10px;
+            margin-top: 20px;
+            padding: 20px 10px;
+        }
+
+        table {
+            width: 100%;
+        }
+
+        table th,
+        table td {
+            padding: 10px 5px;
+            text-align: left;
+        }
+
+        table th {
+            white-space: nowrap;
+        }
+
+        table td {
+            text-align: right;
+            color: #555;
+        }
+
+        table button,
+        form button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            background-color: #04aa6d;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 10;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 400px;
+            position: relative;
+        }
+
+        .modal-content h2 {
+            margin-top: 0;
+        }
+
+        .close-btn {
+            position: absolute;
+            right: 15px;
+            top: 15px;
+            cursor: pointer;
+            font-size: 18px;
+            color: #888;
+        }
+
+        .close-btn:hover {
+            color: #000;
+        }
+
+        form input,
+        form textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            outline-color: #04aa6d;
+        }
+
+        form button {
+            background-color: #04aa6d;
+        }
+
+        form button:hover {
+            background-color: #218838;
+        }
+
+        @media (max-width: 500px) {
+            .header {
+                font-size: 16px;
+                padding: 10px 20px;
+            }
+
+            .user-name {
+                font-size: 15px;
+            }
+
+            .table .th,
+            .table .td,
+            table th,
+            table td {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">My Profile</div>
+
+        <div class="head">
+            <div class="user-image">
+                <img src="" alt="User Image" id="image" />
+                <br>
+                <button id="img-btn" onclick="openModal('modal-upload')">Upload</button>
+                <div class="user-name"></div>
+            </div>
+            <div class="table">
+                <div class="th">Account Number</div>
+                <div class="td" id="account"></div>
+                <div class="th">Status</div>
+                <div class="td" id="status">Active</div>
+            </div>
+        </div>
+
+        <div class="main">
+            <table>
+                <tr>
+                    <th>Full Name</th>
+                    <td id="fname"></td>
+                </tr>
+                <tr>
+                    <th>Mobile Number</th>
+                    <td id="mobileNumber"></td>
+                </tr>
+                <tr>
+                    <th>Username</th>
+                    <td id="username"></td>
+                </tr>
+                <tr>
+                    <th>Email</th>
+                    <td id="email"></td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="text-align:center;">
+                        <button onclick="openModal('upgradeModal')" disabled>Upgrade to Developer Account</button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <!-- Modal Popup -->
+    <div class="modal" id="upgradeModal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">×</span>
+            <h2>Upgrade to Developer Account</h2>
+            <p>Submit your request to upgrade:</p>
+            <form action="/submit-upgrade" method="POST">
+                <input type="text" name="fullName" placeholder="Full Name" required />
+                <input type="email" name="email" placeholder="Email Address" required />
+                <textarea name="reason" rows="4" placeholder="Why do you want to upgrade?" required></textarea>
+                <button type="submit">Submit Request</button>
+            </form>
+        </div>
+    </div>
+
+    <!--Upload Image Modal-->
+    <div class="modal" id="modal-upload">
+        <div class="modal-content upload-content">
+            <span class="close-btn" style="font-size: 20px;" onclick="document.getElementById('modal-upload').style.display='none'">&times;</span>
+            <img src="" id="modal-img" />
+            <form name="form-upload" id="form-upload" method="post" enctype="multipart/form-data">
+                <div class="form-content">
+                    <label for="file">Choose Image</label>
+                    <input type="file" name="image" id="file" accept="image/*" hidden>
+                    <br><br>
+                    <button type="submit" style="width: 70%; margin: 20px 0;" class="upload-btn">
+                        <div></div>
+                        Upload &uparrow;
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        //My pr ofile class
+        class Myprofile {
+            constructor() {
+                this.getUser();
+            }
+            getUser() {
+                var xhr;
+                if (window.XMLHttpRequest) {
+                    xhr = new XMLHttpRequest();
+                } else {
+                    xhr = new ActiveXObject('microsoft.XMLHTTP');
+                }
+                xhr.open('GET', 'php/getUserData.php', true);
+                xhr.addEventListener('load', (e) => {
+                    if (xhr.status == 200 && xhr.readyState == 4) {
+                        var data = JSON.parse(e.target.response);
+                        if (data == 'login') {
+                            alert('Some thing is wronged');
+                            window.location.href = 'login.html';
+                        } else {
+                            data = data.split(',');
+                            var user_data = {
+                                image: data[6],
+                                full_name: data[0],
+                                username: data[2],
+                                email: data[3],
+                                account_number: data[13],
+                                phone_number: data[4],
+                                status: data[15]
+                            };
+
+                            document.querySelector('#image').src = user_data.image;
+                            document.querySelector('#modal-img').src = user_data.image;
+                            document.querySelector('#fname').textContent = user_data.full_name.toUpperCase();
+                            document.querySelector('#username').textContent = user_data.username;
+                            document.querySelector('#account').textContent = user_data.account_number;
+                            document.querySelector('#email').textContent = this.hideEmail(user_data.email);
+                            document.querySelector('#mobileNumber').textContent = user_data.phone_number;
+                            document.querySelector('.user-name').textContent = user_data.username;
+
+                        }
+                    }
+                });
+                xhr.send();
+            }
+
+            hideEmail(email) {
+                var newEmail = email.split('@');
+                const first_let = newEmail[0].replace(/ /g, '').slice(1, 2);
+                return `${first_let}***@${newEmail[1]}`;
+            }
+
+        }
+
+        //Object of the Class
+        var profile;
+        document.addEventListener("DOMContentLoaded", () => {
+            profile = new Myprofile();
+        });
+
+        function openModal(element) {
+            document.getElementById(element).style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('upgradeModal').style.display = 'none';
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(e) {
+            const modal = document.getElementById('upgradeModal');
+            if (e.target === modal) {
+                modal.style.display = 'none';
+            }
+        }
+        //Modal 2
+        window.onclick = function(e) {
+            const modal = document.getElementById('modal-upload');
+            if (e.target === modal) {
+                modal.style.display = 'none';
+            }
+        }
+        //Open uploaded Image
+        document.getElementById('file').addEventListener('change', function(e) {
+            document.getElementById('modal-img').src = URL.createObjectURL(this.files[0]);
+        });
+        var formUpload = document.getElementById('form-upload');
+        formUpload.onsubmit = (e) => {
+            e.preventDefault();
+            if (formUpload.elements[0].value != '') {
+                uploadButton(0, '#04aa6d', '#04aa6d', 'rgba(40,200,100,0.2)')
+                var xhr;
+                if (window.XMLHttpRequest) {
+                    xhr = new XMLHttpRequest();
+                } else {
+                    xhr = new ActiveXObject('microsoft.XMLHTTP');
+                }
+                xhr.open('POST', 'php/uploadImage.php', true);
+                xhr.onload = (event) => {
+                    if (xhr.status == 200 && xhr.readyState == 4) {
+                        uploadButton(0, '#04aa6d', '#fff', '#04aa6d');
+                        var result = JSON.parse(event.target.response);
+                        if (result == 'uploaded') {
+                            formUpload.reset();
+                            profile.getUser();
+                            alert('Image Uploaded');
+                        } else {
+                            alert("Upload Failed");
+                        }
+
+                    } else {
+                        alert('Please check your internet connection');
+                    }
+                }
+                xhr.upload.addEventListener('progress', (event) => {
+                    if (event.lengthComputable) {
+                        var len = (event.loaded / event.total) * 100;
+                        uploadButton(len, '#04aa6d', '#04aa6d', 'rgba(40,200,100,0.2)');
+                    }
+                });
+                xhr.send(new FormData(formUpload));
+            }
+        }
+
+        //Upload button style 
+        function uploadButton(barw, barc, butc, butB) {
+            var but = document.querySelector('.upload-btn');
+            var bar = document.querySelector('.upload-btn div');
+            but.style.color = butc;
+            but.style.background = butB;
+            bar.style.backgrounColor = barc;
+            bar.style.width = barw + '%';
+        }
+    </script>
+</body>
+
+</html>

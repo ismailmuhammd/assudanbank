@@ -1,0 +1,198 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <meta name="author" content="Ismail Muhammad Ahmad">
+    <meta name="title" content="Complete transaction">
+    <meta name="description" content="Complete transaction Assudan Bank">
+    <meta name="keywords" content="done, failed, successful">
+    <title>Complete transaction</title>
+<link rel="icon" href="images/assudan.jpg">
+<link rel="stylesheet" href="../libraries/fas-style/css/all.min.css">
+    <style>
+        *{
+            font-family: sans-serif;
+            box-sizing: border-box;
+        }
+:root{
+--primary-color: #004d4d;
+--success: #04aa6d;
+}
+        body {
+            background: #f5f5f9;
+        }
+        .container{
+            max-width: 500px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: auto;
+        }
+        .header{
+            width: 100%;
+            margin-top: 10px;
+        }
+        .header button{
+            float: right;
+            border: none;
+background: none;
+            color: var(--primary-color);
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .header button:hover{
+            opacity: 0.7;
+        }
+        .container .img{
+            font-size: 1.5rem;
+            margin: 20px 0;
+color: var(--success);
+        }
+        .status{
+            font-size: 19px;
+            font-weight: 400;
+            width: 95%;
+            text-align: center;
+        }
+        .amount{
+            margin: 25px 0;
+            font-size: 25px;
+            font-weight: bolder;
+        }
+        .main{
+            width: 95%;
+            display: grid;
+            grid-template-columns: repeat(3,1fr);
+            margin: 20px 0;
+        }
+        .main button{
+            border:none;
+            background: #fff;
+            cursor: pointer;
+            font-size: 14px;
+            margin: 5px;
+            border-radius: 10px;
+padding: 1rem;
+        }
+        .main button:hover{
+            opacity: 0.5;
+        }
+        .main button i{
+            font-size: 1.5rem;
+color: var(--primary-color);
+margin-bottom: 3px;
+        }
+        .message{
+            width: 95%;
+            color: var(--primary-color);
+            text-align: center;
+            font-size: 13px;
+        }
+        .main-4{
+            width: 95%;
+            background: rgba(40,200,100,0.09);
+            border-radius: 10px;
+            padding: 15px 5px;
+            margin-bottom: 20px;
+        }
+        .main-4 .main i{
+            font-size: 1.6rem;
+            color: var(--primary-color);
+padding: 0.5rem;
+        }
+        .main-4 .main{
+            display: flex;
+            width: 100%;
+            align-items: center;
+            padding: 10px 2px;
+            gap: 10px;
+            cursor: pointer;
+        }
+        .main-4 .head{
+            color: #000;
+            font-size: 15px;
+            font-weight: bold;
+        }
+        .main-4 .main .ussd{
+            color: #000;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        
+        <div class="header">
+            <button onclick="window.location.replace('home.php')">Done</button>
+        </div>
+        
+        <i class="img fas fa-circle-check"></i>
+        
+        <div class="status">Transfer Successful</div>
+        
+        <div class="amount">&#8358;0.00</div>
+        
+        <div class="message">
+            The recipient account is expected to be credited within a few seconds, subject to notification by the bank</div>
+        
+        <div class="main">
+            
+            <button>
+                <i class="fas fa-share-alt"></i>
+                <div>Receipt</div>
+            </button>
+            
+           <button>
+                <i class="fas fa-heart"></i>
+                <div>favorite</div>
+            </button>
+            
+            <button onclick="window.location.href ='transferDetails.php'">
+                <i class="fas fa-eye"></i>
+                <div>view details</div>
+            </button>
+             
+        </div>
+        
+        <div class="main-4">
+          <div class="head">Get Your Rewards!</div>
+          <div class="main">
+              <i class="fas fa-mobile-alt"></i>
+              <div>
+                  <div class="ussd">Up 6% caskback</div>
+                  <div>Buy airtime get caskback!</div>
+              </div>
+          </div>
+          
+          <div class="main">
+              <i class="fas fa-wifi"></i>
+              <div>
+                  <div class="ussd">Up 6% caskback</div>
+                  <div>Recharge data & Earn now!</div>
+              </div>
+          </div>
+          
+          <div class="main">
+              <i class="fas fa-tv"></i>
+              <div>
+                  <div class="ussd">Free Pano TV</div>
+                  <div>Join Pano TV free & enjoy!</div>
+              </div>
+          </div>
+          
+        </div>
+        
+    </div>
+    <script>
+    document.addEventListener('DOMContentLoaded',(e)=>{
+        var cookies = document.cookie.split('; ');
+        var transferCookie = cookies.find(cookie => cookie.startsWith('transferBalance='));
+        var currentTransferBalance = transferCookie ? transferCookie.split('=')[1] : null;
+        document.querySelector('.amount').innerHTML = "&#8358;"+parseFloat(currentTransferBalance).toLocaleString('en-NG',{minimumFractionDigits:2,maximumFractionDigits:2});
+    });
+    </script>
+</body>
+</html>

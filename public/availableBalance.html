@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+    <meta name="author" content="Ismail Muhammad Ahmad">
+    <meta name="title" content="Assudan Bank Available Bank">
+    <meta name="description" content="Assudan Online Banking System">
+    <link rel="stylesheet" href="../libraries/fas-style/css/all.min.css">
+    <link rel="icon" href="images/assudan.jpg">
+    <title>Assudan Bank Available Balance</title>
+    <style>
+        * {
+            font-family: sans-serif;
+            box-sizing: border-box;
+        }
+
+:root{
+--primary-color: #004d4d;
+}
+
+        body {
+            background: #eee;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: auto;
+            max-width: 500px;
+        }
+
+        .header {
+            background: #fff;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 20px;
+            padding-left: 50px;
+            z-index: 1;
+        }
+
+        .back::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            position: absolute;
+            top: 50%;
+            left: 7%;
+            translate: -50% -50%;
+            border-color: transparent transparent #555 #555;
+            border-style: solid;
+            border-width: 2px;
+            transform: rotate(45deg);
+            cursor: pointer;
+        }
+
+        .main {
+            margin-top: 70px;
+            width: 95%;
+            height: 40;
+            background: #fff;
+            padding: 0;
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 1px 5px rgba(0,0,0,0.3);
+        }
+
+        .main .mhead {
+            padding: 20px 5px;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            background: rgba(40, 200, 100, 0.2);
+            border-radius: 20px 20px 0 0;
+        }
+
+        .mhead div:last-child {
+            font-weight: bold;
+            position: relative;
+            padding: 10px;
+        }
+
+        .mhead div:last-child::after {
+            content: '';
+            width: 4px;
+            height: 4px;
+            position: absolute;
+            top: 50%;
+            right: -10%;
+            translate: -50% -50%;
+            border-color: #000 #000 transparent transparent;
+            border-style: solid;
+            border-width: 2px;
+            transform: rotate(45deg);
+            cursor: pointer;
+        }
+
+        .main .available {
+            height: 120px;
+            padding: 10px 5px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: space-around;
+            background: var(--primary-color);
+            border-radius: 0 0 20px 20px;
+            color: #fff;
+
+        }
+
+        .available div {
+            font-size: 15px;
+        }
+
+        .available div:last-child {
+            font-size: 30px;
+            font-weight: bold;
+        }
+
+        .main .wallet {
+            display: flex;
+            padding: 20px 5px;
+            gap: 10px;
+            align-items: center;
+            justify-content: flex-start;
+            position: relative;
+        }
+
+        .main .divider {
+            width: 95%;
+            background: #eee;
+            height: 2px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: auto;
+        }
+
+        .main .wallet::after {
+            content: '';
+            width: 4px;
+            height: 4px;
+            position: absolute;
+            top: 50%;
+            right: 3%;
+            translate: -50% -50%;
+            border-color: #999 #999 transparent transparent;
+            border-style: solid;
+            border-width: 2px;
+            transform: rotate(45deg);
+            cursor: pointer;
+        }
+
+        .wallet i{
+            font-size: 1.2rem;
+color: var(--primary-color);
+        }
+
+        .amount {
+            padding: 0px 10px;
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+        .main .message {
+            padding: 5px;
+            background: #f5f5f9;
+            width: 95%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: auto;
+            border-radius: 10px;
+            font-size: 14px;
+            margin: 10px;
+            color: #666;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+
+        <div class="header">
+            <div class="back"></div>
+            Available Balance Details
+        </div>
+
+        <div class="main">
+
+            <div class="mhead">
+                <div>Account Number</div>
+                <div></div>
+            </div>
+
+            <div class="available">
+                <div>Available Balance</div>
+                <div class="amount" id="balance"> <small>&#8358;</small>0.00</div>
+            </div>
+
+            <div class="wallet ">
+                <i class="fas fa-wallet"></i>
+                <div>Wallet</div>
+            </div>
+
+            <div class="amount">
+                &#8358;0.00
+            </div>
+
+            <div>
+                <div class="message">
+                    Transfer to Assudan and earn interest everyday.
+                </div>
+
+            </div>
+            <div class="divider"></div>
+
+            <div class="wallet">
+                <i class="fas fa-circle-check"></i>
+                <span>OWealth</span>
+            </div>
+
+            <div class="amount">
+                &#8358;0.00
+            </div>
+
+            <div>
+                <div class="message">
+                    An available balance that pays interest everyday.
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <script>
+    class GetUser{
+        getUser() {
+            var xhr;
+            if (window.XMLHttpRequest) {
+                xhr = new XMLHttpRequest();
+            } else {
+                xhr = new ActiveXObject('microsoft.XMLHTTP');
+            }
+            xhr.open('GET', 'php/getUserData.php', true);
+            xhr.onload = e => {
+                if (xhr.status == 200 && xhr.readyState == 4) {
+                    var data = JSON.parse(e.target.response);
+                    if (data == 'login') {
+                        alert("Something is wrong login again");
+                        window.location.href = "login.html";
+                    } else {
+                        const userData = data.split(',');
+                        var data = {
+                            fname: userData[0],
+                            surname: userData[1],
+                            username: userData[2],
+                            email: userData[3],
+                            phone: userData[4],
+                            pin: userData[5],
+                            image: userData[6],
+                            folder: userData[7],
+                            id: userData[8],
+                            regdate: userData[9],
+                            balance: userData[10],
+                            trackingid: userData[11],
+                            invitedcode: userData[12],
+                            accountNumber:userData[13]
+                        };
+                        document.querySelector(".mhead div:last-child").textContent = data.accountNumber;
+                        document.getElementsByClassName("amount")[1].innerHTML = `&#8358;${parseFloat(data.balance).toLocaleString('en-NG',{minimumFractionDigits:2,maximumFractionDigits:2})}`;
+                        document.getElementById("balance").innerHTML = `&#8358;${parseFloat(data.balance).toLocaleString('en-NG',{minimumFractionDigits:2,maximumFractionDigits:2})}`;
+                    }
+                }
+            }
+            xhr.send();
+        }
+    }
+    //Define of Class
+    const user = new GetUser();
+    //class function.
+    user.getUser();
+    document.querySelector(".header .back").addEventListener('click',(e) =>{
+        window.location.href="home.php";
+    })
+    </script>
+</body>
+
+</html>

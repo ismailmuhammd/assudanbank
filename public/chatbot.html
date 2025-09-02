@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    <meta name="author" content="Ismail Muhammad Ahmad">
+    <meta name="title" content="Assudan online Bank chat Bot">
+    <meta name="description" content="Assudan Bank Simple chat bot for user guide">
+    <meta name="keywords" content="message,chat bot Assudan, Bank">
+    <title>Assudan Online Bank Chat Bot</title>
+    <link rel="stylesheet" href="fas-style/css/all.min.css">
+    <link rel="icon" href="assudan.jpg" type="image/jpeg">
+    <style>
+      
+        body {
+            margin: 0;
+            padding: 0;
+            background:  snow;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        *{
+            font-family: sans-serif;
+            box-sizing: border-box;
+        }
+        :root{
+            --primary-color: #004d4d;
+        }
+
+        .container{
+            width: min(100%,500px);
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        .header{
+            width: min(100%,500px);
+            position: fixed;
+            top: 0;
+            left: 0;
+            text-align: center;
+            font-size: 25px;
+            font-weight: bold;
+            background: #fff;
+            padding: 15px 0;
+            color: var(--primary-color);
+            z-index: 1;
+        }
+        .message-cont{
+            flex: 1;
+            padding: 15px;
+            margin-top: 50px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            background: #eef;
+        }
+        .message{
+            padding: 10px;
+            background: #fff;
+            border-radius: 20px;
+            max-width: 80%;
+            word-wrap: break-word;
+            margin-bottom: 10px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            font-family: helvetica;
+        }
+        
+        .user-message{
+            align-self: flex-end;
+            border-bottom-right-radius: 1px;
+            opacity: 1;
+        }
+        
+        .chatbot-message{
+            align-self: flex-start;
+            border-bottom-left-radius: 1px;
+            background: var(--primary-color);
+            color: #fff;
+        }
+        
+        .dotBox {
+            display: block;
+            align-self: flex-start;
+            background-color: #fff;
+            color: #333;
+            padding: 7px 10px;
+            border-radius: 18px;
+            border-bottom-left-radius: 5px;
+            margin-bottom: 5px;
+        }
+        
+        .dot {
+            display: inline-block;
+        }
+        
+        .dot span {
+            height: 6px;
+            width: 6px;
+            background-color: #666;
+            border-radius: 50%;
+            display: inline-block;
+            margin: 0 2px;
+            animation: typing 1s infinite ease-in-out;
+            transition: translate 1s ease;
+        }
+        
+        .dot span:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+        
+        .dot span:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+        
+        @keyframes typing {
+            0%, 100% {
+                transform: translateY(0);
+                background: var(--primary-color);
+            }
+            50% {
+                transform: translateY(-5px);
+                background: #ddd;
+            }
+        }
+        
+        .message-input{
+            padding: 10px;
+            display: flex;
+            border-top:  solid 1px #eee;
+            gap: 10px;
+        }
+        
+        #messageinput{
+            flex: 1;
+            padding: 10px 15px;
+            outline: none;
+            border: 2px solid var(--primary-color);
+            border-radius: 20px;
+            background: #fff;
+        }
+        #but{
+            background: var(--primary-color);
+            color: #fff;
+            border: none;
+            font-size: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            padding: 5px; 
+        }
+        ol{
+            padding-left: 15px;
+        }
+    </style>
+</head>
+<body>
+    <!--
+    container
+    -->
+    <div class="container">
+        <!--Header-->
+        <div class="header">Assudan Bank Chat Bot</div>
+        <!--Message container-->
+        <div class="message-cont">
+            <div class="message chatbot-message">
+                Hello 👋 I am Assudan Bank Chatbot ask me questions regarding the company
+            </div>
+            <!--Message will insert here using js-->
+        </div>
+        <!--Message Input-->
+        <div class="message-input">
+            <input type="text" id="messageinput" placeholder="Type your message here...">
+            <button id="but">
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </div>
+    </div>
+    <script src="chatbot.js"></script>
+    <script>
+       document.addEventListener('DOMContentLoaded',()=>{
+         const messageCont = document.querySelector('.message-cont');
+         const but = document.getElementById('but');
+         const messageInput = document.getElementById('messageinput');
+         var a;
+         var aa;
+         var isFound = false;
+         var dotBox;
+         function typing() {
+             dotBox = document.createElement('div');
+             dotBox.classList.add('dotBox');
+             dotBox.innerHTML=`
+             <div class="dot">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+              </div>
+             `;
+             messageCont.appendChild(dotBox);
+             messageCont.scrollTop = messageCont.scrollHeight;    
+         }
+         function getBotResponse(message) {
+            message = message.toLowerCase();
+            chatbortMessage.forEach((m,i)=>{
+                if(message.includes(m.q)) {
+                    var randomAns = Math.floor(Math.random()*(m.ans.length));
+                    a = m.ans[randomAns];
+                    isFound = true;
+                }else {
+                    aa = "I am a company chatbot, I am able to answer the limited questions patterning the bank:<br /><ol><li>My account number</li><li>How to make transfer</li><li>Why Bank name Assudan</li><li>How to forgot password</li><li>My Balance</li><li>Pano TV</li><li>How to buy airtime</li><li>How to buy data</li><li>My school</li><li>How to deposited my Account</li></ol>";
+                }
+            });
+            if(isFound){
+                addMessage(a,false);
+                isFound = false;
+            }else{
+                addMessage(aa,false);
+            }
+         }
+         function addMessage(message,isUser) {
+             var mesDiv = document.createElement('div');
+             mesDiv.classList.add('message');
+             mesDiv.classList.add(isUser ? 'user-message' : 'chatbot-message');
+             mesDiv.innerHTML = message;
+             messageCont.appendChild(mesDiv);
+             messageCont.scrollTop = messageCont.scrollHeight;
+         }
+         
+         function sendMessage() {
+             const message = messageInput.value.trim();
+             if(message == '') return;
+             addMessage(message,true);
+             messageInput.value='';
+             typing();
+             setTimeout(()=>{
+                messageCont.removeChild(dotBox);
+                 getBotResponse(message);
+             },3000);
+         }
+         but.addEventListener('click',sendMessage);
+         messageInput.addEventListener('keypress',(e)=>{
+             if(e.key == 'Enter') {
+                 sendMessage();
+             }
+         });
+       });
+    </script>
+</body>
+</html>

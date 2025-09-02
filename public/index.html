@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="Ismail Muhammad Ahmad">
+<meta name="title" content="Assudan Bank System Setup">
+<meta name="description" content="First System Page to set Database">
+<meta name="keywords" content="HTML, CSS, & JavaScript">
+<link rel="stylesheet" href="../libraries/fas-style/css/all.min.css">
+<link rel="icon" href="images/assudan.jpg">
+<title>System Setup</title>
+<style>
+body{
+margin: 0;
+padding: 0;
+}
+*{
+font-family: san-serif;
+box-sizing: border-box;
+}
+:root{
+--primary-color: #004d4d;
+--secondary-color: #0099ff;
+}
+.container{
+display: flex;
+align-items: center;
+justify-content: center;
+}
+.leftside, .rightside{
+flex: 1;
+height: 100vh;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+padding: 2.5rem 1rem;
+}
+.leftside{
+background: linear-gradient(138deg, var(--primary-color), var(--secondary-color));
+color: #fff;
+}
+nav ul{
+margin: 2rem 0;
+list-style: none;
+padding: 1px;
+}
+nav ul li{
+display: flex;
+align-items: flex-start;
+margin-bottom: 1rem;
+}
+nav ul li .icon-contain{
+margin-right: 1rem;
+width: 40px;
+height: 40px;
+background: #fff;
+color: #0099ff;
+border-radius: 50%;
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 1.2rem;
+flex-shrink: 0;
+}
+h4{
+margin-top: 5px;
+font-size: 1.5rem;
+}
+p{
+font-size: 1.2rem;
+}
+h2{
+font-size: 2rem;
+}
+.rightside{
+background: #f5f5f9;
+margin: 0 auto;
+padding: 2rem;
+}
+.rightside form{
+max-width: 500px;
+width: 100%;
+background: #fff;
+padding: 2rem 1rem;
+box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+border-radius: 10px;
+}
+form fieldset{
+width: 100%;
+border-radius: 10px;
+padding: 1rem 0.7rem;
+border: var(--secondary-color) 1.5px solid;
+}
+form legend{
+border: var(--secondary-color) 1.5px solid;
+border-radius: 10px;
+padding: 3px 5px;
+}
+form .form-input{
+position: relative;
+margin-bottom: 20px;
+}
+form .form-input input{
+outline: none;
+border-radius: 10px;
+width: 100%;
+padding: 12px 30px 12px 10px;
+border: 1.5px solid #999;
+transition: border 0.3s ease;
+}
+form .form-input label{
+position: absolute;
+left: 10px;
+top: 50%;
+transform: translateY(-50%);
+transition: transform 0.3s ease;
+pointer-events: none;
+font-size: 1rem;
+}
+form .form-input i{
+position: absolute;
+right: 10px;
+top: 50%;
+transform: translateY(-50%);
+color: #999;
+transition: color ease 0.3;
+}
+form input:focus,
+form input:valid{
+border: var(--secondary-color) 1.5px solid;
+}
+form input:focus ~ i,
+form input:valid ~ i{
+color: var(--secondary-color);
+}
+form input:focus ~ label,
+form input:valid ~ label{
+transform: translateY(-30px);
+background: #fff;
+}
+form fieldset button{
+background: var(--secondary-color);
+width: 100%;
+color: white;
+border: none;
+border-radius: 10px;
+padding: 0.5rem;
+font-size: 1.1rem;
+transition: all 0.3s ease;
+}
+form fieldset button:hover{
+transform: translateY(-5px);
+}
+@media(max-width: 786px){
+.container{
+flex-direction: column;
+}
+.rightside{
+width: 100%;
+}
+}
+@media(max-width: 350px){
+h4{
+margin-top: 5px;
+font-size: 1.2rem;
+}
+p{
+font-size: 1rem;
+}
+h2{
+font-size: 1.5rem;
+}
+nav ul li .icon-contain{
+width: 30px;
+height: 30px;
+font-size: 1rem;
+}
+.rightside{
+padding: 2rem 0.5rem;
+}
+.rightside form{
+padding: 2rem 0.5rem;
+}
+}
+</style>
+<style>
+</style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="leftside">
+<h2>Welcome to Assudan Bank!</h2>
+<nav>
+<ul>
+<li>
+<div class="icon-contain">
+<i class="fas fa-wifi"></i>
+</div>
+<div>
+<h4>Online Banking System</h4>
+<p>Try our online banking system using your smartphone</p>
+</div>
+</li>
+<li>
+<div class="icon-contain">
+<i class="fas fa-shield-alt"></i>
+</div>
+<div>
+<h4>Secure Banking system</h4>
+<p>End-to-end encryption for better and secure services</p>
+</div>
+</li>
+<li>
+<div class="icon-contain">
+<i class="fas fa-mobile-alt"></i>
+</div>
+<div>
+<h4>Mobile Friendly</h4>
+<p>Enjoy our services using your mobile for efficient and easy access to our bank</p>
+</div>
+</li>
+<li>
+<div class="icon-contain">
+<i class="fas fa-user-check"></i>
+</div>
+<div>
+<h4>User verification</h4>
+<p>Login to your account using the registered phone number & password</p>
+</div>
+</li>
+</ul>
+</nav>
+</div>
+<div class="rightside">
+<form name="systemForm" id="systemForm">
+<fieldset>
+<legend>System SetUp</legend>
+<div class="form-input">
+<input type="text" name="sysname" id="sysname" required>
+<label>System Name</label>
+<i class="fas fa-rectangle-list"></i>
+</div>
+<div class="form-input">
+<input type="number" name="sysbalance" id="sysbalance" required>
+<label>System Balance</label>
+<i class="fas fa-hand-holding-usd"></i>
+</div>
+<div class="form-input">
+<input type="number" name="startbalance" id="startbalance" required>
+<label>Users Starting Balance</label>
+<i class="fas fa-money-check"></i>
+</div>
+<div class="form-input">
+<input type="password" name="syspasskey" id="syspasskey" required>
+<label>System Pass Key</label>
+<i class="fas fa-lock"></i>
+</div>
+</fieldset>
+
+<fieldset>
+<legend style="border-top-width: 0.01px;">Database SetUp</legend>
+<div class="form-input">
+<input type="url" name="databasehost" id="databasehost" required>
+<label>Database Host name</label>
+<i class="fas fa-server"></i>
+</div>
+<div class="form-input">
+<input type="text" name="databaseuser" id="databaseuser" required>
+<label>Database User</label>
+<i class="fas fa-user-shield"></i>
+</div>
+<div class="form-input">
+<input type="password" name="databasepassword" id="databasepassword" required>
+<label>Database Password</label>
+<i class="fas fa-key"></i>
+</div>
+<div class="form-input">
+<input type="text" name="databasename" id="databasename" required>
+<label>Database Name</label>
+<i class="fas fa-database"></i>
+</div>
+</fieldset>
+
+<fieldset>
+<legend style="border-top-width: 0.01px;">System Admin</legend>
+<div class="form-input">
+<input type="text" name="adminusername" id="adminusername" required>
+<label>Admin Username</label>
+<i class="fas fa-user"></i>
+</div>
+<div class="form-input">
+<input type="email" name="adminemail" id="adminemail" required>
+<label>Admin Email</label>
+<i class="fas fa-envelope"></i>
+</div>
+<div class="form-input">
+<input type="password" name="adminpass" id="adminpass" required>
+<label>Admin Password</label>
+<i class="fas fa-eye"></i>
+</div>
+<button type="submit">Set Up</button>
+</fieldset>
+</form>
+</div>
+    </div>
+</body>
+
+</html>

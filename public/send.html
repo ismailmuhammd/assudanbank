@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <meta name="author" content="Ismail Muhammad Ahmad">
+    <meta name="title" content="Make Transaction">
+    <meta name="description" content="Make Transaction to Assudan">
+    <meta name="keywords" content="Send, confirm, Assudan">
+    <link rel="stylesheet" href="../libraries/fas-style/css/all.min.css">
+    <link rel="icon" href="images/assudan.jpg">
+    <title>Make Transaction To Assudan</title>
+    <style>
+        body {
+            background: #eee;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #004d4d;
+        }
+
+        * {
+            font-family: sans-serif;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        .container {
+            background: #eee;
+            max-width: 500px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: auto;
+            position: relative;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .container .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            background: #fff;
+            width: min(500px, 100%);
+            position: fixed;
+            top: 0;
+            height: 50px;
+            box-sizing: border-box;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .header a {
+            text-decoration: none;
+            color: var(--primary-color);
+            box-sizing: border-box;
+        }
+
+        .user {
+            width: 95%;
+            display: flex;
+            align-items: center;
+            padding: 5px 0;
+            box-sizing: border-box;
+            gap: 15px;
+            margin-top: 50px;
+            box-sizing: border-box;
+        }
+
+        .user i {
+            font-size: 2rem;
+            color: var(--primary-color);
+            padding: 0.5rem;
+        }
+
+        .user div div {
+            text-transform: capitalize;
+            font-size: 13px;
+            padding: 2px;
+            box-sizing: border-box;
+        }
+
+        .user div .name {
+            font-weight: 600;
+            font-size: 15px;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            max-width: 220px;
+        }
+
+        .container .main-1 {
+            width: 95%;
+            background: #fff;
+            border-radius: 10px;
+            margin-top: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .main-1 .top {
+            float: right;
+            padding: 5px;
+            color: var(--primary-color);
+            font-size: 12px;
+            background: rgba(40, 200, 100, 0.2);
+            border-radius: 10px;
+            border-bottom-right-radius: 0;
+
+        }
+
+        .main-1 .amount {
+            font-weight: bold;
+        }
+
+        .main-1 .main-1-0 {
+            width: 100%;
+            padding: 5px 10px;
+            overflow: hidden;
+        }
+
+        .main-1 .main-1-0 .over {
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .main-1 .main-1-0 .over input {
+            width: 100%;
+            padding: 10px 30px;
+            outline: none;
+            border: none;
+            border-bottom: 2px solid #eee;
+            font-size: 20px;
+            color: black;
+            font-weight: bold;
+        }
+
+        .main-1 .main-1-0 .over input:focus {
+            border-bottom: 2px solid var(--primary-color);
+        }
+
+        .main-1 .main-1-0 .over label {
+            position: absolute;
+            z-index: 1;
+            top: 15%;
+            left: 0;
+            font-size: 25px;
+        }
+
+        .main-1 .main-1-0 .money {
+            width: 100%;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            margin: 15px 5px;
+        }
+
+        .main-1 .main-1-0 .money button {
+            background: #f5f5f9;
+            border: none;
+            margin: 5px;
+            padding: 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .main-2 {
+            width: 95%;
+            background: #fff;
+            margin: 20px 0;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1), 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .main-2 div {
+            font-weight: bold;
+        }
+
+        .main-2 input {
+            width: 100%;
+            padding: 5px 10px;
+            margin: 10px 0;
+            outline: none;
+            border: none;
+            border-bottom: 2px solid #eee;
+            font-size: 16px;
+        }
+
+        .container .but {
+            font-size: 17px;
+            background: var(--primary-color);
+            padding: 10px;
+            border: none;
+            color: #fff;
+            width: 75%;
+            border-radius: 20px;
+            margin-bottom: 20px;
+            cursor: pointer;
+        }
+
+        .container .main-3 {
+            background: rgba(0, 0, 0, 0.4);
+            width: 100%;
+            height: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            display: none;
+            align-items: flex-end;
+            transition: height 1s ease;
+        }
+
+        .main-3-hide {
+            height: 100%;
+            animation: h 0.5 ease;
+        }
+
+        @keyframes h {
+            from {
+                height: 100%;
+            }
+
+            to {
+                height: 0%;
+            }
+        }
+
+        .main-3 .main {
+            height: 90%;
+            width: 100%;
+            background: #fff;
+            border-radius: 20px 20px 0 0;
+            padding: 10px 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            animation: ma 0.5s ease;
+        }
+
+        @keyframes ma {
+            from {
+                height: 0%;
+            }
+
+            to {
+                height: 90%;
+            }
+        }
+
+        .main-3 .cancel {
+            width: 100%;
+            font-size: 30px;
+            color: #999;
+            text-align: right;
+            cursor: pointer;
+        }
+
+        .main-3 .amount {
+            margin: 20px 0;
+            font-weight: bold;
+            font-size: 30px;
+        }
+
+        .main-3 .main .table {
+            display: grid;
+            grid-template-columns: 100px 1fr;
+            grid-template-rows: 30px 30px 30px;
+            width: 100%;
+            margin: 10px 0;
+        }
+
+        .main .table i {
+            color: var(--primary-color);
+            font-size: 1.2rem;
+        }
+
+        .table .td {
+            text-align: right;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 10px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .main .table .td span {
+            font-size: 15px;
+            overflow: hidden;
+            white-space: nowrap;
+            max-width: 85%;
+            text-overflow: ellipsis;
+        }
+
+        .main-3 .wallet {
+            display: flex;
+            width: 100%;
+            align-items: center;
+            padding: 10px 5px;
+            gap: 10px;
+            cursor: pointer;
+            background: #f5f5f9
+                /*rgba(40,200,100,0.5)*/
+            ;
+            border-radius: 10px;
+            margin: 10px 0;
+        }
+
+        .main-3 .wallet i {
+            font-size: 1.3rem;
+            padding: 0.3rem;
+            color: var(--primary-color);
+        }
+
+        .main-3 .wallet .ussd {
+            color: #000;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .main-3 .main .tpin {
+            width: 100%;
+            margin: 15px 0;
+        }
+
+        .main-3 .main .tpin input {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            font-size: 16px;
+            outline: none;
+        }
+
+        .main-3 .main button {
+            width: 100%;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 20px;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .message-container {
+            position: fixed;
+            width: 70%;
+            background: #fff;
+            z-index: 3;
+            border-radius: 10px;
+            padding: 15px 5px;
+            display: none;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 4px 5px rgba(0, 0, 0, 0.4);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <div>Transfer to Assudan Account</div>
+            <a href="record.php">Records</a>
+        </div>
+        <div class="user">
+            <i class="fas fa-user-shield"></i>
+            <div>
+                <div class="name"></div>
+                <div id="num"></div>
+            </div>
+        </div>
+        <div class="main-1">
+            <div class="top">No Transaction Fees</div><br>
+
+            <div class="main-1-0">
+                <div class="amount">Amount</div>
+                <div class="over">
+                    <input type="tel" minlength="10" maxlength="12" placeholder="10.00 - 5,000,000.00">
+                    <label>&#8358;</label>
+                </div>
+
+                <div class="money">
+                    <button>&#8358;500</button>
+                    <button>&#8358;1,000</button>
+                    <button>&#8358;2,000</button>
+                    <button>&#8358;5,000</button>
+                    <button>&#8358;10,000</button>
+                    <button>&#8358;20,000</button>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="main-2">
+            <div>Remarks</div>
+            <input type="text" id="remark" placeholder="What's this for?(Optional)">
+        </div>
+
+        <button class="but">Confirm</button>
+
+        <div class="main-3">
+            <div class="main">
+                <div class="cancel">&times;</div>
+                <div class="amount">&#8358;0.00</div>
+                <div class="table">
+
+                    <div class="th">Account No.</div>
+                    <div class="td" id="accnum"></div>
+
+                    <div class="th">Name</div>
+                    <div class="td">
+                        <i class="fas fa-user-check"></i>
+                        <span></span>
+                    </div>
+
+                    <div class="th">Amount</div>
+                    <div class="td">&#8358;0.00</div>
+
+                </div>
+
+                <div class="wallet">
+                    <i class="fas fa-wallet"></i>
+                    <div>
+                        <div class="ussd">Wallet (&#8358; <span>0.00</span>)</div>
+                        <div id='balancestatus'>Available Balance</div>
+                    </div>
+                </div>
+
+                <div class="tpin">
+                    <input type="tel" id="pin" minlength="4" maxlength="4" placeholder="Enter Transaction PIN">
+                </div>
+                <button>Confirm Payment</button>
+            </div>
+        </div>
+        <div class='message-container' id='message-container'>
+        </div>
+    </div>
+
+    <script>
+        class GetUser {
+            constructor() {
+                this.setBalance();
+                this.timeout = null;
+                this.but = document.querySelector('.main-3 .main button');
+                this.makeTransfer();
+                //this.changeInput();
+            }
+            isConnected() {
+                var result = false;
+                if (window.navigator.onLine) {
+                    result = true;
+                } else {
+                    result = false;
+                }
+                window.addEventListener('online', () => {
+                    result = true;
+                });
+                window.addEventListener('offline', () => {
+                    result = false;
+                });
+                return result;
+            }
+            getUserCookie() {
+                const cookies = document.cookie.split('; ');
+                const accountcookie = cookies.find(cookie => cookie.startsWith('accountnumber='));
+                const accountNumber = accountcookie ? accountcookie.split('=')[1] : null;
+                return accountNumber;
+            }
+            setUser() {
+                var xhr;
+                if (window.XMLHttpRequest) {
+                    xhr = new XMLHttpRequest();
+                } else {
+                    xhr = new ActiveXObject('microsoft.XMLHTTP');
+                }
+                xhr.open('GET', 'php/searchAccountNumber.php?account=' + this.getUserCookie(), true);
+                xhr.addEventListener('load', (e) => {
+                    if (xhr.status === 200 && xhr.readyState === 4) {
+                        const data = JSON.parse(e.target.response);
+
+                        if (data[0] == 'save') {
+                            document.querySelector('.user .name').textContent = data[1];
+                            document.querySelector('.user #num').textContent = data[2];
+                            document.querySelector('.user img').src = data[3];
+                            document.querySelector('.td img').src = data[3];
+                            document.querySelector('.td span').textContent = data[1];
+                            document.getElementById('accnum').textContent = data[2];
+                        } else {
+                            this.alertBox('Something is wrong', 'red');
+                            window.location.href = 'transaction.html';
+                        }
+                    } else {
+                        this.alertBox('Network error occurred', 'red');
+                    }
+                });
+                xhr.send();
+            }
+            setBalance() {
+                var xhr;
+                if (window.XMLHttpRequest) {
+                    xhr = new XMLHttpRequest();
+                } else {
+                    xhr = new ActiveXObject('microsoft.XMLHTTP');
+                }
+                xhr.open('GET', 'php/getBalance.php', true);
+                xhr.addEventListener('load', e => {
+                    if (xhr.status == 200 && xhr.readyState == 4) {
+                        const result = JSON.parse(e.target.response);
+                        if (result == 'cookie') {
+                            this.alertBox('Please login again', 'red');
+                            window.location.href = 'signin.html';
+                        } else {
+                            document.querySelector('.ussd span').textContent = parseFloat(result).toLocaleString('en-NG', {
+                                minimumFractionDigits: 2,
+                                maximumFractionDigits: 2
+                            });
+                        }
+                    } else {
+                        this.alertBox('Error fetching balance', 'red');
+                    }
+                });
+                xhr.send();
+            }
+            alertBox(message, fgcolor = '#333', time = 5000) {
+                var messageBox = document.getElementById('message-container');
+                messageBox.innerHTML = `<div style="text-align: center;color: ${fgcolor};font-weight: bold;">${message}</div>`;
+                messageBox.style.display = "block";
+
+                // Center the message box vertically
+                messageBox.style.top = "50%";
+                messageBox.style.left = "50%";
+                messageBox.style.transform = "translate(-50%, -50%)";
+
+                clearTimeout(this.timeout);
+                this.timeout = setTimeout(() => {
+                    messageBox.style.display = "none";
+                }, time);
+            }
+            makeTransfer() {
+                this.but.addEventListener('click', (e) => {
+                    var pin = document.getElementById('pin');
+                    var amount = document.querySelector('.main-1 .main-1-0 .over input').value.replace(/,/g, '');
+                    var remark = document.getElementById('remark').value;
+
+                    if (!pin.value || pin.value.length !== 4) {
+                        alert('Invalid transaction PIN');
+                        return;
+                    }
+
+                    if (!amount || isNaN(amount)) {
+                        alert('Invalid amount');
+                        return;
+                    }
+
+                    if (parseFloat(amount) < 10) {
+                        alert('Minimum transaction is ₦10.00');
+                        return;
+                    }
+
+                    if (parseFloat(amount) > 5000000) {
+                        alert('Maximum transaction limit is ₦5,000,000.00');
+                        return;
+                    }
+
+                    var xhr;
+                    if (window.XMLHttpRequest) {
+                        xhr = new XMLHttpRequest()
+                    } else {
+                        xhr = new ActiveXObject('microsoft.XMLHTTP');
+                    }
+
+                    xhr.open('POST', 'php/makeTransaction.php', true);
+                    xhr.onload = (ee) => {
+                        if (xhr.status == 200 && xhr.readyState == 4) {
+                            const response = (ee.target.response);
+                            if (response == 'login') {
+                                alert('Something is wrogn login again');
+                                window.location.href = 'sigin.html';
+                                return;
+                            }
+
+                            if (response == 'pin') {
+                                alert('Incorrect transaction PIN');
+                                return;
+                            }
+
+                            if (response == 'data') {
+                                alert('Please filled the required information');
+                                return;
+                            }
+
+                            if (response == 'amountisless') {
+                                alert('You can not transfer less than ₦10.00');
+                                return;
+                            }
+
+                            if (response == 'balanceisless') {
+                                alert('Insufficient Balance');
+                                return;
+                            }
+
+                            if (response == 'success') {
+
+                                document.cookie = 'transferBalance=' + amount + '; expires=' + new Date(Date.now() + 100 * 60 * 60 * 24 * 300).toUTCString() + ';';
+                                this.setBalance();
+                                document.getElementById('pin').value = '';
+                                document.querySelector('.main-1 .main-1-0 .over input').value = '';
+                                document.getElementById('remark').value = '';
+                                document.querySelector('.main-3').style.display = 'none';
+                                window.location.href = 'done.html'
+                            }
+
+                        } else {
+                            alert('Network error occurred');
+                        }
+                    }
+
+                    xhr.onerror = () => {
+                        this.alertBox('Network error occurred', 'red');
+                    };
+
+                    var formdata = new FormData();
+                    formdata.append('amount', parseFloat(amount));
+                    formdata.append('pin', pin.value);
+                    formdata.append('remark', remark);
+                    formdata.append('accountnumber', this.getUserCookie());
+                    xhr.send(formdata);
+                });
+            }
+            changeInput() {
+                var inp = document.querySelector('.main-1-0 .over input');
+                inp.addEventListener('keyup', (e) => {
+                    var value = inp.value.replace(/,/g, '');
+                    value = parseInt(value);
+                    if (!isNaN(value)) {
+                        inp.value = parseFloat(value).toLocaleString('en-NG', {
+                            minimumFractionDigits: 2,
+                            maximumFractionDigits: 2
+                        })
+                    }
+                });
+            }
+        }
+
+        var user = new GetUser();
+        user.setUser();
+
+        // Set amount buttons
+        document.querySelectorAll('.money button').forEach(button => {
+            button.addEventListener('click', () => {
+                document.querySelector('.over input').value = parseFloat(button.textContent.replace('₦', '').replace(/,/g, '')).toLocaleString('en-NG', {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2
+                });
+            });
+        });
+
+
+        //Set Body when DOMContent are loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelector('.but').addEventListener('click', () => {
+                const amount = document.querySelector('.over input').value;
+                const balance = parseFloat(document.querySelector('.ussd span').textContent.replace(/,/g, ''));
+                var status = document.getElementById('balancestatus');
+                var but = document.querySelector('.main-3 .main button');
+
+                if (!amount) {
+                    alert("Please enter the amount");
+                    return;
+                }
+
+                const amountValue = parseFloat(amount.replace(/,/g, ''));
+
+                if (amountValue < 10) {
+                    alert("Minimum transaction is ₦10.00");
+                    return;
+                }
+
+                if (amountValue > 5000000) {
+                    alert('Maximum transaction limit is ₦5,000,000.00');
+                    return;
+                }
+
+                document.querySelector('.main-3 .amount').textContent = `₦${amountValue.toLocaleString('en-NG', {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2
+                })}`;
+
+                document.querySelector('.main-3 .td:last-child').textContent = `₦${amountValue.toLocaleString('en-NG', {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2
+                })}`;
+
+                if (amountValue <= balance) {
+                    but.disabled = false;
+                    but.style.opacity = 1;
+                    status.textContent = 'Available Balance';
+                    status.style.color = 'black';
+                } else {
+                    but.disabled = true;
+                    but.style.opacity = 0.3;
+                    status.textContent = 'Insufficient Balance';
+                    status.style.color = 'red';
+                }
+
+                document.querySelector('.main-3').style.display = 'flex';
+            });
+
+            // Hide the modal when cancel is clicked
+            document.querySelector('.cancel').addEventListener('click', () => {
+                document.querySelector('.main-3').style.display = 'none';
+            });
+
+            // Close modal when clicking outside
+            document.querySelector('.main-3').addEventListener('click', (e) => {
+                if (e.target === document.querySelector('.main-3')) {
+                    document.querySelector('.main-3').style.display = 'none';
+                }
+            });
+
+            //Network connection online message
+            window.addEventListener('online', () => {
+                alert("Back online");
+            });
+
+            //Network disconnection message
+            window.addEventListener('offline', () => {
+                alert("No internet connection");
+            });
+
+            //Close the message by clicking out the container
+            document.addEventListener('click', (e) => {
+                const messageBox = document.getElementById('message-container');
+                if (messageBox.style.display === 'block' && !messageBox.contains(e.target)) {
+                    messageBox.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
